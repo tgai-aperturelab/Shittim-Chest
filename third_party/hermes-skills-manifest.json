@@ -1,0 +1,116 @@
+{
+  "repository": "https://github.com/NousResearch/hermes-agent",
+  "commit": "9e01b44dd23978f9ff40b7837467f3a9f1582130",
+  "license": "MIT",
+  "license_file": "third_party/LICENSES/Hermes-MIT.txt",
+  "scope": "Runtime skill discovery, instruction/reference reading and task-local management. No user-global Codex skills, Hermes host, shell preprocessing, auto-installation or secret collection.",
+  "ports": [
+    {
+      "target": "src/shittim_core/engine/hermes/skill_metadata.py",
+      "target_sha256": "66659f511f5e939f1107873cf8c7ac9f00c8b407efab8ea1c1eafa6e15811fe6",
+      "mode": "adapted_source",
+      "adaptation": "Extracted complete frontmatter/platform algorithms and environment-declaration normalization. Replaced Hermes ruamel host helper with application PyYAML safe loader; malformed YAML is explicit error instead of line fallback. Preserve newline before closing fence for block scalars. Host discovery/config/plugin/credential behavior excluded.",
+      "sources": [
+        {
+          "path": "agent/skill_utils.py",
+          "sha256": "9cb773037fe97940cdfcbf8b0d6bbfe60e366985749d3ae3bec3b274a83e33c4",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/skill_utils.py"
+        },
+        {
+          "path": "tools/skills_tool_setup.py",
+          "sha256": "3c70fd74e6997334351fb1a191cae2db3f3977897684093bf97d4815d517b670",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tools/skills_tool_setup.py"
+        }
+      ]
+    },
+    {
+      "target": "src/shittim_core/tools/runtime_skills.py",
+      "target_sha256": "d2c4e1f0786290c1826235d2d97bb969165c0c019f4c47e0aa0f468bbc798eb7",
+      "mode": "application_integration_informed_by_upstream",
+      "adaptation": "Application-owned direct ToolSpec/ToolExecutor adaptation of list/view/manage behaviors. Explicit read-only root IDs, exact IDs for ambiguity, task-local skill management with hashed stale-write protection and archives. Existing effect journal/resources control all tools. Rewritten filesystem/root/permission host seams; not a wholesale copied Hermes skill manager. Backend-visible task directory mapping and full authorized-library package import are application integration additions. Original package bytes/modes retained with per-file source hashes; copying does not execute or install.",
+      "sources": [
+        {
+          "path": "tools/skills_tool.py",
+          "sha256": "f75e1047efba2640daefa2f03b897db12ac74890792621151ed9fbfd974176b8",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tools/skills_tool.py"
+        },
+        {
+          "path": "tools/skill_manager_tool.py",
+          "sha256": "131d3720957659c37addd27430693d5d0b7dec0b5176a83b2bedad783b7edcd7",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tools/skill_manager_tool.py"
+        },
+        {
+          "path": "tools/skill_manager_guards.py",
+          "sha256": "ed92ed08bd4b399fdeacb13addb8aae6c3c51d75dbeb876622f3cc7a8b7a74f6",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tools/skill_manager_guards.py"
+        },
+        {
+          "path": "agent/skill_utils.py",
+          "sha256": "9cb773037fe97940cdfcbf8b0d6bbfe60e366985749d3ae3bec3b274a83e33c4",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/skill_utils.py"
+        }
+      ]
+    }
+  ],
+  "reviewed_dependency_edges": [
+    "skills_tool -> skill_utils -> Hermes config/profile/project trust and disabled lists: replaced by operator-explicit roots and grant filtering",
+    "skills_tool -> skills_tool_setup -> env capture, env_passthrough, credential_files, pm.ensure: declaration normalization retained; capture/passthrough/auto-install not executed",
+    "skills_tool -> skills_tool_plugin, registry, skill_view_dedup, skill_usage: plugin host and global registry removed; direct tools and no view dedup hiding content",
+    "skill_manager_tool -> skill_manager_guards, skill_manager_batch, skill_usage/ledger, atomic_write_text: app scoped mutation/backups; per-call single operation; no whole-host skill management or batch claim",
+    "agent/skill_utils -> hermes_yaml (ruamel.yaml): replaced with pinned PyYAML safe load; YAML parsing difference explicitly recorded"
+  ],
+  "contract": {
+    "tools": [
+      "skills_list",
+      "skill_view",
+      "skill_manage"
+    ],
+    "read_resource": "skills:root:<configured id> or skills:task:<context_id>",
+    "write_resource": "skills:task:<context_id>, plus caller-supplied mutation_resources",
+    "workspace": "workspace_for(context_id)/.runtime-skills",
+    "default_global_discovery": false,
+    "pagination": "Character offsets and next_offset for complete UTF-8 or base64 content",
+    "management": [
+      "create",
+      "edit",
+      "patch",
+      "delete (archive)",
+      "write_file",
+      "remove_file (backed up)",
+      "import_library (copy alias)"
+    ],
+    "archive": ".runtime-skills/.history excluded from discovery",
+    "effect_semantics": "IO failure after mutation starts becomes unknown, blocks future writes on same resources; no auto replay",
+    "workspace_display_root": "Optional str or Callable[[context_id], str]; sandbox caller passes /workspace. Task skill_dir is backend-visible; workspace_relative_path remains executable relative to task cwd. Library view tells caller to import before sandbox execution.",
+    "import_permissions": "Requires source skills:root:<id>, destination skills:task:<context_id>, and every existing mutation_resources grant. Source must be a configured read-only library.",
+    "import_bounds": {
+      "max_package_files": 512,
+      "max_package_bytes": 67108864,
+      "max_directories": "2 * max_package_files",
+      "per_file_bytes": "existing max_file_bytes, default1MiB",
+      "completeness": "All regular files and directories, including hidden package data; no silently skipped files. Symlink/junction/special file or limit violation refuses before destination mutation."
+    },
+    "import_recovery": "Preflight complete bounded source package, exclusive target directory, keep source provenance .history/imports/<id>.json, copy/verify files, publish SKILL.md last via exclusive hard-link creation. IO failure after mutation begins returns unknown with retained partial target/audit paths. No automatic cleanup or replay; shared effect resources block a fresh call_id/destination name until reconciliation."
+  },
+  "limitations": [
+    "Read-only configured roots must not be symlink/junction paths. No flat legacy *.md skill catalog or plugin namespace registry.",
+    "Symlink containment checks are not an OS filesystem sandbox against hostile concurrent local writers.",
+    "No batch-mutation atomicity, skill store cross-process multi-writer lock or operator archive restore tool claimed; one runtime owns skill mutations and backups are retained.",
+    "Declared deps and credential files are reported as setup_needed until separate setup; metadata guidance cannot grant privileges or invoke tools.",
+    "Runtime Skills are not a promise that every third-party script/dependency works on current machine."
+  ],
+  "validation": {
+    "command": "fusion/.verify-venv/Scripts/python.exe -m pytest fusion/tests/integration/test_runtime_skills.py -q",
+    "result": "30 passed (Windows local integration including actual subprocess execution of imported Python script with package-relative asset; no bwrap, model or QQ claim)",
+    "checks": [
+      "ruff check source and tests",
+      "pyright --pythonpath .verify-venv/Scripts/python.exe src/shittim_core/tools/runtime_skills.py",
+      "manifest target hashes verified"
+    ]
+  },
+  "hash_audit": {
+    "checked_at": "2026-10-19T05:32:14.660332+00:00",
+    "target_updates": [],
+    "note": "Final frozen src/tests/tools byte inventory. Shared-file hashes cover application-owned integration changes too; source attribution applies only to the specifically described algorithms/behaviors, not every line of a shared target. Original validation observations are retained."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0a4",
+  "kind": "application-owned conversational routing and runtime context correction",
+  "targets": [
+    {
+      "path": "src/shittim_core/state/store.py",
+      "previous_sha256": "83a38632cd01cb51f02d229898ddc50892514194d7b55a4a037626dd0d29f672",
+      "sha256": "39f76aefbc390ddec55b0ad55a03306979084dd51c1b2ca69b80c822771f666a"
+    },
+    {
+      "path": "src/shittim_core/collaboration/coordinator.py",
+      "previous_sha256": "25ce725b41c502d9aa7f981835cbfa263c913148e63eb0bef87c4728ffb9bd1c",
+      "sha256": "b419631f6f28f3c47d0fa7471d68362fb38341e65ff980e14cfc7ec01a47685c"
+    },
+    {
+      "path": "src/shittim_core/context/builder.py",
+      "previous_sha256": "4b8ab6cf5a22dd83748a326baf0c4dbd57caf361b31cc00aba981e2e0bb34a83",
+      "sha256": "88b8ba8080342041e433b4c8a0f51362148e5c932762c8329a1f29ffd7b0be0c"
+    },
+    {
+      "path": "src/shittim_core/tools/material_tools.py",
+      "previous_sha256": "7b7902843928527d989e71e9d4f05c96fe8c249d52f9342d425f2651c95acd48",
+      "sha256": "629b21937fc81caddf3e81894151d381f1632ad9a1a66ebee9c37c621240a8b3"
+    }
+  ],
+  "reason": "Unquoted messages previously opened independent tasks, breaking ordinary follow-ups. Persist address+author focus, explicit /new, quote precedence, stopped-state and authority checks. Generalize overly broad material-only system wording and scope document-reader description to returned data. Runtime formats timestamps.",
+  "tests": "tests/integration/test_conversation_focus.py and nearby routing, scope, failure and context tests; live two-account conversation probe",
+  "schema": "Additive conversation_focus table; no original task/input/effect merge or deletion."
+}

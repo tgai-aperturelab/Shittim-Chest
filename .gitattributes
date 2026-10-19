@@ -1,0 +1,13 @@
+* text=auto eol=lf
+*.py text eol=lf
+*.pyi text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.lock text eol=lf
+# Preserve original upstream bytes used by provenance records.
+LICENSE -text whitespace=-trailing-space,-blank-at-eof
+third_party/LICENSES/** -text whitespace=-trailing-space,-blank-at-eof
+third_party/LICENSES/README.md text eol=lf
+src/shittim_core/engine/hermes/** -text whitespace=-trailing-space,-blank-at-eof

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "ports": [
+    {
+      "upstream": "AstrBotDevs/AstrBot",
+      "commit": "e5e21b71aec5642f110eb115eb8e9a0d8028b7e5",
+      "source": "astrbot/core/message/components.py",
+      "line_ranges": "757-767",
+      "source_git_blob_sha256": "5a8dbf0ffb62cf83dcd333feb48e17acdf1a757ffcb63848423cf42585bc327f",
+      "target": "src/shittim_core/materials/names.py",
+      "target_sha256": "df3cd25c3e4c78c956d3277982a544cd8a83810d4406fdc11851db03f34db912",
+      "license": "AGPL-3.0-or-later",
+      "adaptation": "Preserve filename normalization idea; explicit safe basename and bounded metadata; generated ID owns path."
+    },
+    {
+      "upstream": "NousResearch/hermes-agent",
+      "commit": "9e01b44dd23978f9ff40b7837467f3a9f1582130",
+      "source": "agent/context_compressor.py",
+      "line_ranges": "4632-4674;5526-5595",
+      "source_git_blob_sha256": "912078f270ec742f26f6cab00dcde7bf7fc9639228935417491b00abccdfe812",
+      "target": "src/shittim_core/context/compactor.py",
+      "target_sha256": "be10cffc0e72c817443c74b3b5ddbc216ce87d7f9778eebd4f3e3acf08ed9693",
+      "license": "MIT",
+      "adaptation": "Adapt boundary alignment and candidate-before-commit ordering; replace host with scoped view, durable source facts and version CAS."
+    }
+  ],
+  "scope": "Selected source adaptation, no full upstream host or research runtime copied."
+}

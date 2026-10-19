@@ -1,0 +1,32 @@
+name: 问题反馈
+description: 报告可复现的问题，使用合成数据。
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "请勿粘贴密钥、真实 QQ 号、群号、聊天或数据库。敏感漏洞请按 SECURITY.md 私密报告。"
+  - type: input
+    id: version
+    attributes:
+      label: 版本与环境
+      description: 提交或版本、操作系统、Python 版本。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      description: 使用合成输入和临时文件说明最小复现。
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 预期与实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: 检查结果与脱敏日志
+      description: 可附运行的命令和简短错误，不上传完整运行报告。

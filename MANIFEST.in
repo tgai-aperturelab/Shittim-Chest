@@ -1,0 +1,13 @@
+include LICENSE NOTICE.md README.md config*.example.json requirements-*.lock
+include CONTRIBUTING.md GOVERNANCE.md SECURITY.md
+recursive-include docs *.md
+recursive-include third_party *.json *.txt *.md
+recursive-include tests *.py *.json *.md
+recursive-include tools *.py
+exclude tools/probe_print_model.py tools/qq_debug_probe.py
+prune ops
+prune evidence
+prune var
+prune local
+prune .git
+global-exclude *.pyc

@@ -1,0 +1,103 @@
+{
+  "repository": "https://github.com/NousResearch/hermes-agent",
+  "commit": "9e01b44dd23978f9ff40b7837467f3a9f1582130",
+  "license": "MIT",
+  "license_file": "third_party/LICENSES/Hermes-MIT.txt",
+  "sources": [
+    {
+      "path": "tools/mcp_tool_transport.py",
+      "sha256": "b8f415a5d90c9ad2f0f0a7468fa863e3ebd14bbe9a58e99e46654b02e05375f9",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tools/mcp_tool_transport.py"
+    },
+    {
+      "path": "tools/mcp_tool_discovery.py",
+      "sha256": "7f2f92f4227fc24f2d8745dbdb09bfcc5c9b51dbfb86994cbb60dd9c19d787ed",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tools/mcp_tool_discovery.py"
+    },
+    {
+      "path": "tools/mcp_tool_registration.py",
+      "sha256": "523543037975b14f9c84f9181dfbe3f7a9024e4af5e10238eab9ba22fa86c175",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tools/mcp_tool_registration.py"
+    },
+    {
+      "path": "tools/mcp_tool_handlers.py",
+      "sha256": "d3f99c5832dd7a99b0a39447f97981281cccd13ba582587b97f914c726cdb5d6",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tools/mcp_tool_handlers.py"
+    },
+    {
+      "path": "tools/mcp_tool_schema.py",
+      "sha256": "21ab2ef8b122add133af4ef387b32f6e8c6711f6e1b2f6f4744bcb279fa2135b",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tools/mcp_tool_schema.py"
+    },
+    {
+      "path": "tools/mcp_tool_content.py",
+      "sha256": "199ac68eff46293315f6171afd36d2e2434d5d4b9da07b1b109d80b322dc2de4",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tools/mcp_tool_content.py"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "9bec0b5f97ba40a00fc52b482244d03d0e73b0b9f7380a91756cbeeefb7d660d",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/pyproject.toml"
+    }
+  ],
+  "ports": [
+    {
+      "target": "src/shittim_core/engine/mcp_client.py",
+      "mode": "project_owned_host_adapter",
+      "changes": "Use the upstream-pinned official SDK for transport/protocol. Adapt Hermes lifecycle invariants: owner task, initialization, capabilities-aware paginated listing, namespaced provenance, no replay of uncertain calls. Explicit configs replace all global home/profile discovery, callbacks, auth pools and reconnect loops. Optional stdio_start_guard checks host outcomes before launching a configured local server."
+    },
+    {
+      "target": "src/shittim_core/tools/mcp_tools.py",
+      "mode": "project_owned_registration_adapter",
+      "changes": "One ToolExecutor authority/effect boundary, endpoint-derived resource key independent of logical alias. Server descriptions and read-only hints cannot grant access. Optional host_resource and host_mutation_guard join stdio calls to terminal/files host effect protection; HTTP keeps endpoint scope."
+    },
+    {
+      "target": "src/shittim_core/engine/hermes/mcp_result.py",
+      "mode": "extracted_functions",
+      "source": "tools/mcp_tool_content.py",
+      "functions": [
+        "_is_reserved_mcp_meta_key",
+        "_strip_reserved_meta_keys"
+      ],
+      "changes": "Retain pure protocol metadata filtering, rename public strip function and add public argument type. Do not import original gateway media/cache host."
+    }
+  ],
+  "sdk": {
+    "distribution": "mcp",
+    "version": "2.3.0",
+    "license": "MIT",
+    "repository": "https://github.com/modelcontextprotocol/python-sdk",
+    "required_api": {
+      "ClientSession": "read_timeout_seconds is float; initialize(); list_tools(params=PaginatedRequestParams(cursor=...)); call_tool(name,args,read_timeout_seconds=...)",
+      "types": "Tool.input_schema/output_schema; ListToolsResult.next_cursor; CallToolResult.is_error",
+      "stdio": "SDK safe OS environment allowlist plus explicit env; SDK-owned process group / Windows Job Object lifecycle",
+      "http": "mcp.client.streamable_http.streamable_http_client(url,http_client=httpx2.AsyncClient(...),terminate_on_close=True)"
+    }
+  },
+  "validation": {
+    "command": "python -m pytest tests/integration/test_mcp_tools.py -q",
+    "result": "11 passed",
+    "type_check": "python -m pyright src/shittim_core/engine/mcp_client.py src/shittim_core/tools/mcp_tools.py: 0 errors",
+    "transport_tested": "real official SDK client and server over local stdio subprocess",
+    "external_services": "not connected",
+    "qq": "not tested"
+  },
+  "limits": [
+    "Handshake-era initialize negotiation only; modern-only server/discover, legacy SSE, OAuth, sampling and elicitation are not implemented.",
+    "Streamable HTTP transport is implemented against inspected SDK API, but this package validation used local stdio.",
+    "Tool results preserve protocol content and structured output; reserved protocol metadata is filtered. Native media are returned as protocol content, not automatically registered as QQ artifacts.",
+    "No runtime reconnect or automatic call replay. A faulted session needs explicit application lifecycle restart; unresolved effects remain blocked in StateStore.",
+    "MCP result handling currently retains complete protocol output in history; a separate task-scoped spillover/material integration is not implemented here."
+  ],
+  "target_sha256": {
+    "src/shittim_core/engine/mcp_client.py": "ecb8a66b79c980bfef7013c3cae148de0af837c93d435e7f82d0c981c01539aa",
+    "src/shittim_core/tools/mcp_tools.py": "74f626473b2681a3aab9ec1f0922bc251a828865ab7c40ed784057ee4addac83",
+    "src/shittim_core/engine/hermes/mcp_result.py": "93a03e253f9aceab4fc97fb63ea38559044087dbf48b6b51f23abbc9e1a60a09",
+    "tests/integration/test_mcp_tools.py": "a289c50979c0dc1f212578f1d41d754f452d07d105f9137c7c12538c41246784"
+  },
+  "hash_audit": {
+    "checked_at": "2026-10-19T05:32:14.660332+00:00",
+    "target_updates": [],
+    "note": "Final frozen src/tests/tools byte inventory. Shared-file hashes cover application-owned integration changes too; source attribution applies only to the specifically described algorithms/behaviors, not every line of a shared target. Original validation observations are retained."
+  }
+}

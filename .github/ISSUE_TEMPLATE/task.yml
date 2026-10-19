@@ -1,0 +1,30 @@
+name: 开发任务
+description: 提出改进或认领具体任务。
+title: "[Task] "
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: 要解决什么问题
+      description: 描述具体使用过程与需要改善的结果。
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: 修改范围与方案
+      description: 涉及的模块、文档或测试；尚不确定也可以写出疑问。
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 如何验收
+      description: 列出可观察的结果及验证方法。
+    validations:
+      required: true
+  - type: textarea
+    id: participation
+    attributes:
+      label: 参与意愿
+      description: 是否准备认领、希望谁帮助审阅，或是否需要协作者。

@@ -1,0 +1,15 @@
+{
+  "test_member_id": "200",
+  "sut_bot_id": "100",
+  "forward_ws_url": null,
+  "token_env": "QQ_PROBE_PEER_TOKEN",
+  "sut_engine": "shittim_core",
+  "model_mode": "live",
+  "destination": "private",
+  "group_id": null,
+  "cases": ["Q01"],
+  "max_outbound": 10,
+  "case_timeout_seconds": 60,
+  "batch_timeout_seconds": 600,
+  "request_timeout_seconds": 15
+}

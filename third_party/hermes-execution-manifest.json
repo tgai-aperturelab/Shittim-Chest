@@ -1,0 +1,77 @@
+{
+  "repository": "NousResearch/hermes-agent",
+  "commit": "9e01b44dd23978f9ff40b7837467f3a9f1582130",
+  "license": "MIT",
+  "files": [
+    {
+      "source": "tools/file_operations_native.py",
+      "source_sha256": "4b216f7c2333c4802728c69832f30767e79f9e62080e2c654f9e4f5c29a724b4",
+      "target": "src/shittim_core/engine/hermes/file_operations_native.py",
+      "target_sha256": "9cf4ad12b70d0c0cb85199b81f069a340a016a5d6768c49647fbe21564b657df",
+      "changes": [
+        "Relocate internal imports; retain upstream algorithms",
+        "Guard POSIX-only fchmod on Windows"
+      ]
+    },
+    {
+      "source": "tools/file_operations_common.py",
+      "source_sha256": "24ec11b1703616c0b403b094c11a92c6f39c81a6f2396665bf0666690595d41c",
+      "target": "src/shittim_core/engine/hermes/file_operations_common.py",
+      "target_sha256": "0c704822f17220e8016e482bc4068ef20e8987514b434efccaa9bc275163ff86",
+      "changes": [
+        "Relocate internal imports; retain upstream algorithms"
+      ]
+    },
+    {
+      "source": "tools/patch_parser.py",
+      "source_sha256": "1e87fa5410bec09ef7da26c50734397eeb370b7cd39689ca79db06fab4d2677a",
+      "target": "src/shittim_core/engine/hermes/patch_parser.py",
+      "target_sha256": "aa88d62559e17db11a44a6913564fe4a84b6ff214ad10d06e3af70adf84ae059",
+      "changes": [
+        "Relocate internal imports; retain upstream algorithms"
+      ]
+    },
+    {
+      "source": "tools/fuzzy_match.py",
+      "source_sha256": "ea10db677c24e7f056471488c0e5194599a526b59e6d62ab76e195be6bbc4765",
+      "target": "src/shittim_core/engine/hermes/fuzzy_match.py",
+      "target_sha256": "abe5041e1ff7265015fcfeb80d297599a6b7775e215c5b5735bee0a38b084e28",
+      "changes": [
+        "Relocate internal imports; retain upstream algorithms",
+        "Remove optional CLI metrics import; no telemetry"
+      ]
+    },
+    {
+      "source": "tools/escape_drift_autocorrect.py",
+      "source_sha256": "d0860600cb93d0fa52f81379e99ffc3a0d47cf0dff7b73cbcd907db3f1ac2d6f",
+      "target": "src/shittim_core/engine/hermes/escape_drift_autocorrect.py",
+      "target_sha256": "4a31374503993d3c67e86f519d64fa1f5ed458963bcbf140062c0aecf192fbb0",
+      "changes": [
+        "Relocate internal imports; retain upstream algorithms"
+      ]
+    },
+    {
+      "source": "tools/tool_output_truncate.py",
+      "source_sha256": "c008f5f4dab87a9607e1d79ee5536207cededd574eb37a47e79c9587d59c3db1",
+      "target": "src/shittim_core/engine/hermes/tool_output_truncate.py",
+      "target_sha256": "40366f3059f863ebfbe5f2e6c5164898b20c50b06358a44313c7bd0cbbc8b42a",
+      "changes": [
+        "Relocate internal imports; retain upstream algorithms"
+      ]
+    }
+  ],
+  "integration_boundary": "This manifest covers the selected file/patch/output algorithms only. engine/files.py, processes.py, process_tree.py and bubblewrap.py provide application-owned host/lifetime/isolation adapters; they are not copied Hermes terminal backends.",
+  "hash_audit": {
+    "checked_at": "2026-10-19T05:32:14.660332+00:00",
+    "target_updates": [],
+    "note": "Final frozen src/tests/tools byte inventory. Shared-file hashes cover application-owned integration changes too; source attribution applies only to the specifically described algorithms/behaviors, not every line of a shared target. Original validation observations are retained."
+  },
+  "application_owned_helpers": [
+    {
+      "target": "src/shittim_core/engine/hermes/output_limits.py",
+      "target_sha256": "d0f45978778079fc4e4257ce0dbb6658e80ce481e823a85c89556fcce64abe77",
+      "mode": "project_owned_configuration_replacement",
+      "adaptation": "Explicit local output-line default replaces upstream profile/config discovery; this helper is not claimed as copied upstream code."
+    }
+  ]
+}

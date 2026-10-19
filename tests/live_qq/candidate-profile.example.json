@@ -1,0 +1,18 @@
+{
+  "peer": {
+    "test_member_id": "200",
+    "sut_bot_id": "100",
+    "forward_ws_url": null,
+    "token_env": "QQ_PROBE_PEER_TOKEN",
+    "destination": "private",
+    "group_id": null,
+    "max_outbound": 20,
+    "case_timeout_seconds": 60,
+    "batch_timeout_seconds": 300,
+    "request_timeout_seconds": 15
+  },
+  "candidate_config": null,
+  "isolation_config": null,
+  "peer_shared_dir": null,
+  "cases": ["Q04", "Q05", "Q06"]
+}

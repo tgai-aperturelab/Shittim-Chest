@@ -1,0 +1,17 @@
+{
+  "component": "project-owned OneBot transport",
+  "version": "0.1.0a2",
+  "reason": "Native NapCat 4.18.38 sends x-client-role Universal, whereas the previous lowercase-only comparison rejected the authenticated reverse client. Normalize only this role token; path, bot identity and constant-time bearer checks remain unchanged.",
+  "installed_protocol_evidence": {
+    "bundle": "NapCat 4.18.38 napcat.mjs",
+    "sha256": "f80e4be3e8640369d23846cf3e8bcfd2a5b6dc5920f50d7ad733d7cca18179e6",
+    "header": "x-client-role: Universal"
+  },
+  "target": {
+    "path": "src/shittim_core/qq/transport.py",
+    "sha256": "ff7491e5d81082b4d569aab5f29bfc2c304ac6d69350fa36f30c0eac01272480",
+    "previous_sha256": "dd85549397734c9cca2a63ce036f9eca49141d8f6fb56145bf1cd519deab740f"
+  },
+  "historical_manifest": "astrbot-port-manifest.json is retained as the original migration baseline; this supplemental record supersedes only the current transport hash.",
+  "tests": "tests/qq/test_transport.py covers Native Universal, lowercase universal, rejection of API/Event/unknown roles and existing account/token enforcement."
+}

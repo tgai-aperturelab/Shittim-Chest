@@ -1,0 +1,72 @@
+{
+  "upstream": {
+    "repository": "https://github.com/AstrBotDevs/AstrBot",
+    "commit": "e5e21b71aec5642f110eb115eb8e9a0d8028b7e5",
+    "license": "AGPL-3.0-or-later",
+    "files": [
+      {
+        "path": "astrbot/core/platform/sources/aiocqhttp/aiocqhttp_message_event.py",
+        "sha256": "9ce2ba76fb9cd2be4c635dd75a64aa443c5ef3c56d030b69316ad3fc61a31d73"
+      },
+      {
+        "path": "astrbot/core/message/components.py",
+        "sha256": "5cee4bbc740e875b1322042cddf3b19a248f6a554fc351f8160a258e18ac5029"
+      },
+      {
+        "path": "astrbot/core/utils/quoted_message/onebot_client.py",
+        "sha256": "4949d3e9cb09cfc0541292a1d0bbfcf3a96e67270fb03cd0f1f4109c0bc9f626"
+      },
+      {
+        "path": "astrbot/core/utils/quoted_message/extractor.py",
+        "sha256": "c8bfc02c2aa36381eb5c70294a3bc549ec55ea6bf30fa9abbce9c532fbcb2ea7"
+      }
+    ]
+  },
+  "adaptation": "Keep AstrBot group/private merged-forward action routing and get_forward_msg source handling. Existing message ID nodes preserve original platform authors; custom author/content nodes are not exposed. Replace host dispatch with one ToolExecutor and durable Delivery/outbox. Read paging is local over the fetched container, nested containers remain IDs, and payload authors are attribution claims rather than authenticated identities. Current application validation and readable-container rendering remain project-owned; only the referenced AstrBot protocol behaviors are source-derived.",
+  "target_hashes": {
+    "src/shittim_core/tools/qq_forward.py": "ce0bbcf8ac34c8578c67f17b40864bffc0a24262bdafa8d298a3819d21ea701c",
+    "src/shittim_core/domain/types.py": "ae88529eb23b6ea190b07c9f2dac1e511156f32fd001bfe40473589b44175ac3",
+    "src/shittim_core/state/store.py": "83a38632cd01cb51f02d229898ddc50892514194d7b55a4a037626dd0d29f672",
+    "src/shittim_core/qq/codec.py": "fadc8c741ebcbfae93dedf44980d33b7c5b3a970bbb803d05660282439debdd8",
+    "src/shittim_core/delivery/service.py": "ff91104467d25cd865da95200a90840fc9354888dbcf3cea4a42456229a52d4d",
+    "tests/integration/test_qq_forward.py": "c8cc6a25d371c98381c7e580f456400075d021ddbe026f155aacd46d97dd0bb1"
+  },
+  "interfaces": {
+    "registration": "register_qq_forward_tools(tools,store,call,delivery)",
+    "read": "read_forward(message_id,segment_index=0,offset=0,limit=20); segment_index is ordinal among forward segments",
+    "send": "send_forward(message_ids); destination fixed to current conversation",
+    "resource": "forward_resource(context_id) == qq:forward:<context_id>",
+    "intent": "forward_message_ids: tuple[str,...] = (); omitted serialized field decodes as empty"
+  },
+  "guarantees": [
+    "Only context-linked input messages through input_seq or acknowledged outputs in same context/destination authorize send IDs.",
+    "Nested forward node IDs do not become authorized original source IDs.",
+    "Prepared forward sources are revalidated at dispatch.",
+    "Unknown effects and deliveries are retained across restart and never automatically resent.",
+    "Original-message forward content is not rewritten through markdown stripping; existing generated QQ text/file/image flows remain unchanged."
+  ],
+  "validation": {
+    "forward_tests": "16 passed including unknown forward/ask_person cross-tool resource conflicts",
+    "related_regression": "107 passed including delivery batches, codecs, state and recovery",
+    "pyright": "project strict check from fusion cwd: 0 errors",
+    "ruff": "passed on changed source files",
+    "latest_related_regression": "128 passed: progress, forward, public intake, material pipeline, state, recovery, delivery batches"
+  },
+  "verification_level": "offline OneBot substitutes; no live QQ sends and no Print changes",
+  "hash_audit": {
+    "checked_at": "2026-10-19T05:32:14.660332+00:00",
+    "target_updates": [
+      {
+        "target": "src/shittim_core/tools/qq_forward.py",
+        "previous_sha256": "a77a7eaa9342fa91977272e9fa127aee1c273ff032cb36c8372f024a793b25ad",
+        "current_sha256": "ce0bbcf8ac34c8578c67f17b40864bffc0a24262bdafa8d298a3819d21ea701c"
+      },
+      {
+        "target": "tests/integration/test_qq_forward.py",
+        "previous_sha256": "300823eb9e456ba6d6acc6c9deb19632b7a8fc143ba5801c424e557d3bd47447",
+        "current_sha256": "c8cc6a25d371c98381c7e580f456400075d021ddbe026f155aacd46d97dd0bb1"
+      }
+    ],
+    "note": "Final frozen src/tests/tools byte inventory. Shared-file hashes cover application-owned integration changes too; source attribution applies only to the specifically described algorithms/behaviors, not every line of a shared target. Original validation observations are retained."
+  }
+}

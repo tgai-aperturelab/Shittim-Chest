@@ -1,0 +1,21 @@
+{
+  "version": "0.1.0a5",
+  "kind": "user-directed capability removal",
+  "removed_modules": [
+    "engine/browser.py",
+    "tools/browser.py"
+  ],
+  "removed_tool_count": 8,
+  "remaining_builtin_tool_count": 24,
+  "removed_dependencies": [
+    "playwright",
+    "pyee",
+    "greenlet"
+  ],
+  "retained_web_tools": [
+    "web_search",
+    "web_extract"
+  ],
+  "saved_state_migration": "Narrow browser tool/resource grants only; preserve focus, history, results and unresolved effects.",
+  "historical_evidence": "Earlier browser reports remain observations of retired versions, not current features."
+}

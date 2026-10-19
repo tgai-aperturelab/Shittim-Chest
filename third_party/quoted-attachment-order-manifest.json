@@ -1,0 +1,18 @@
+{
+  "component": "project-owned collaboration routing",
+  "version": "0.1.0a3",
+  "reason": "Native QQ may deliver an explicit quoted request before the referenced pure attachment. Resolve the reverse reference edge from durable inputs instead of opening a second task.",
+  "target": {
+    "path": "src/shittim_core/collaboration/coordinator.py",
+    "previous_sha256": "162ee93052171ed6a5416fb2c16dd9d3335f3ae508e91cf3904f187abfb03fac",
+    "sha256": "25ce725b41c502d9aa7f981835cbfa263c913148e63eb0bef87c4728ffb9bd1c"
+  },
+  "limits": [
+    "Same conversation and same author; exact reply_to message ID required.",
+    "Only pure file/image/record/video without text/control/reply is eligible.",
+    "Unique currently permitted active/paused context only; multiple candidates stay unbound.",
+    "No merge of existing contexts, no time heuristic, no cross-author access grant.",
+    "Paused context stores input without resuming. Closed/denied contexts do not gain new material."
+  ],
+  "tests": "tests/integration/test_late_referenced_attachment.py; includes real Application/WS input-order reproduction, stale model output suppression, material and output byte hashes, scope and recovery cases."
+}

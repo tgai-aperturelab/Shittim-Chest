@@ -1,0 +1,118 @@
+{
+  "repository": "https://github.com/NousResearch/hermes-agent",
+  "commit": "9e01b44dd23978f9ff40b7837467f3a9f1582130",
+  "license": "MIT",
+  "license_file": "third_party/LICENSES/Hermes-MIT.txt",
+  "scope": "OpenAI-compatible Chat Completions capture, canonical history and route-aware replay; no native Anthropic, Bedrock, Gemini or Responses API transport claims",
+  "ports": [
+    {
+      "target": "src/shittim_core/engine/hermes/reasoning_carriers.py",
+      "target_sha256": "118f1f8a762928168e64953a17414ab83591db079f9b4e08f17d9b100c1c2edb",
+      "mode": "adapted_source",
+      "adaptation": "Adapted complete module. Replace lazy host predicates with local pure replay_routes; public typed annotations. Fix alias-model Gemini host recognition by supplying base_url to predicate.",
+      "sources": [
+        {
+          "path": "agent/reasoning_carriers.py",
+          "sha256": "c21e95fccadfeddc433be1a4837824b4a0e94715e0bf31ba07172d896e772480",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/reasoning_carriers.py"
+        }
+      ]
+    },
+    {
+      "target": "src/shittim_core/engine/hermes/reasoning_summaries.py",
+      "target_sha256": "da4027eba3be329045edc3a5013bfa3f37ae3c838eeef3c3dcdddc0966745f7c",
+      "mode": "adapted_source",
+      "adaptation": "Adapted complete module; existing local message-content import and typed public accumulator.",
+      "sources": [
+        {
+          "path": "agent/reasoning_summaries.py",
+          "sha256": "c6a857f270c2f4677c9c57c841aabc3d1f2e1d3cff95395fb4d7d830f0f0c3a8",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/reasoning_summaries.py"
+        }
+      ]
+    },
+    {
+      "target": "src/shittim_core/engine/hermes/tool_call_ids.py",
+      "target_sha256": "19f43928171f507189d97f6c4fbc6f6dc1d28fe63d437f68ebcd0cdd1c37073a",
+      "mode": "extracted_algorithm_group",
+      "adaptation": "Extract complete identity algorithm block _tc_field through _set_provider_tool_id. Fix duplicate call_id writes to read-only provider_data-backed properties by using _set_provider_tool_id.",
+      "sources": [
+        {
+          "path": "agent/message_sanitization.py",
+          "sha256": "4dd904f9a69376fc8801f47b49f829869d5ef49d6bccd0a73d82af84e8f580c5",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/message_sanitization.py"
+        }
+      ]
+    },
+    {
+      "target": "src/shittim_core/engine/hermes/replay_routes.py",
+      "target_sha256": "bbf1ac2d99112b09ef121d9026dc3d582265653a9ff796c15f50b8e711314dbe",
+      "mode": "extracted_route_policy_adapter",
+      "adaptation": "Pure hostname and route predicate extraction. Host-based reasoning carrier table; no global provider profiles, env/home reads, imports or runtime discovery. Native provider transports are not implemented by this group.",
+      "sources": [
+        {
+          "path": "utils.py",
+          "sha256": "9c4751dc9fbcbfe7e16d9e0cc5fb25566517c4927d2dc84061d4cac993a98445",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/utils.py"
+        },
+        {
+          "path": "agent/message_sanitization.py",
+          "sha256": "4dd904f9a69376fc8801f47b49f829869d5ef49d6bccd0a73d82af84e8f580c5",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/message_sanitization.py"
+        },
+        {
+          "path": "agent/transports/chat_completions.py",
+          "sha256": "6109040e7b8e6ccdaaaa823104581e1ee753db6032374baf72847c05e8e90d38",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/transports/chat_completions.py"
+        }
+      ]
+    },
+    {
+      "target": "src/shittim_core/agent/model.py",
+      "target_sha256": "a83ae296105c3f304edc2c0bfad7cd1004a092c80e970e4c52fb288e1d19dc28",
+      "mode": "adapted_algorithms_with_project_owned_transport",
+      "adaptation": "Integrate full canonical provider-data preservation, streamed native carrier and structured reasoning assembly, route-specific copied wire projection. StateStore owns canonical rows. Unknown provider fields remain stored but not forwarded. No additional provider transport or automatic side-effect retry.",
+      "sources": [
+        {
+          "path": "agent/chat_completion_helpers.py",
+          "sha256": "8e4348884b780999fd33ddaecca688f1afcfe4f66940b5bac62c222383c41869",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/chat_completion_helpers.py"
+        },
+        {
+          "path": "agent/reasoning_carriers.py",
+          "sha256": "c21e95fccadfeddc433be1a4837824b4a0e94715e0bf31ba07172d896e772480",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/reasoning_carriers.py"
+        },
+        {
+          "path": "agent/reasoning_summaries.py",
+          "sha256": "c6a857f270c2f4677c9c57c841aabc3d1f2e1d3cff95395fb4d7d830f0f0c3a8",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/reasoning_summaries.py"
+        },
+        {
+          "path": "agent/transports/chat_completions.py",
+          "sha256": "6109040e7b8e6ccdaaaa823104581e1ee753db6032374baf72847c05e8e90d38",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/transports/chat_completions.py"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "command": "python -m pytest tests/agent -q",
+    "result": "52 passed",
+    "type_check": "python -m pyright src/shittim_core/agent/model.py: 0 errors",
+    "live_provider_validation": "not performed",
+    "qq_validation": "not performed"
+  },
+  "integration_note": "AgentEngine now uses the ported call-ID normalization helpers. The surrounding execution loop remains application-owned; this manifest does not claim complete AIAgent or provider transport migration.",
+  "hash_audit": {
+    "checked_at": "2026-10-19T05:32:14.660332+00:00",
+    "target_updates": [],
+    "note": "Final frozen src/tests/tools byte inventory. Shared-file hashes cover application-owned integration changes too; source attribution applies only to the specifically described algorithms/behaviors, not every line of a shared target. Original validation observations are retained."
+  },
+  "application_owned_integration": {
+    "target": "src/shittim_core/agent/loop.py",
+    "target_sha256": "7e6adf4d7b4609fcc2df1b43cfe21d4b7c5b4e5f52dd0a405e49b7daa6b53548",
+    "mode": "project_owned_execution_loop",
+    "adaptation": "RunPorts/StateStore and project cancellation, stale-input and delivery semantics own the loop. Selected Hermes ordering invariants and ported ID/budget/repetition algorithms are used. This is not a complete migration of AIAgent/run_agent.py or its provider/runtime dependency closure."
+  }
+}

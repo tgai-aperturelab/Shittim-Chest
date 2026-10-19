@@ -1,0 +1,54 @@
+{
+  "version": "0.1.0a6",
+  "targets": [
+    {
+      "path": "src/shittim_core/tools/execution.py",
+      "previous_sha256": "f5115cd64757b96a26bdd3247df07c841bddf657c51d250265d60845540c55c8",
+      "sha256": "ee6fe535c9aa9fd3b2f807e3ba2d21872050b2df47e8f1de1d7f223072c74ea2"
+    },
+    {
+      "path": "src/shittim_core/materials/names.py",
+      "previous_sha256": "df3cd25c3e4c78c956d3277982a544cd8a83810d4406fdc11851db03f34db912",
+      "sha256": "d919f26082749dd38962b3a6bb4c7e4cb4941c73905a9ced14bb960bd157de16"
+    },
+    {
+      "path": "src/shittim_core/collaboration/coordinator.py",
+      "previous_sha256": "dc43f2b6b7a1abd87ab240701ac72307a7e07f58a0702c10f7015439c5cca6af",
+      "sha256": "fbe65c9b157422c78b099c58300d729c15bd8c1150dd2a358e4833a3e2f70ed6"
+    },
+    {
+      "path": "src/shittim_core/tools/history.py",
+      "previous_sha256": "7c0756c8791e52c1b47c3163f986a3091e25b330eb6f204c618194050778e889",
+      "sha256": "7f40d313b803a7fdf3f53fb47e757a29f8148c10befc6cbae0682a6d0d8372fc"
+    },
+    {
+      "path": "src/shittim_core/state/store.py",
+      "previous_sha256": "39f76aefbc390ddec55b0ad55a03306979084dd51c1b2ca69b80c822771f666a",
+      "sha256": "a67c52462cefa6e1a7986585430133e03dcf74e2196472d3a69c233b607fdb67"
+    },
+    {
+      "path": "src/shittim_core/context/compactor.py",
+      "previous_sha256": "be10cffc0e72c817443c74b3b5ddbc216ce87d7f9778eebd4f3e3acf08ed9693",
+      "sha256": "e5bda6f3c9e13947b9193230d085deedb3631cc72a767751a34f59d9e5598803"
+    },
+    {
+      "path": "src/shittim_core/context/runtime_compaction.py",
+      "previous_sha256": "e130ef9325780bb49ed820cf1f442339307fb53d1fcbf200f67389c1be0b2142",
+      "sha256": "9b7ee75ab2949bdcc99f25f756e1734aa650c421f947e11c70c8574d42dfab97"
+    },
+    {
+      "path": "src/shittim_core/tools/qq_forward.py",
+      "previous_sha256": "ce0bbcf8ac34c8578c67f17b40864bffc0a24262bdafa8d298a3819d21ea701c",
+      "sha256": "f6718453de8f8b17d2e1068696507b9bfc081c2c41b47d76297e3fadc8be54ae"
+    }
+  ],
+  "changes": [
+    "Missing optimistic-hash source classified not_executed before mutation; post-write unknown retained",
+    "Recovered group input rechecks addressing/reference eligibility",
+    "Compaction budgets actual route-specific model messages, not local metadata",
+    "Read-only forward queries get unique transport attempt IDs",
+    "History uses persisted acknowledgement ordering",
+    "Bounded filenames retain final extension and UTF8 component size"
+  ],
+  "browser_capability": "remains removed; 24 built-in tools"
+}

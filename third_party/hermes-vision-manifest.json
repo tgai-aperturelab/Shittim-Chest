@@ -1,0 +1,59 @@
+{
+  "upstream": {
+    "repository": "https://github.com/NousResearch/hermes-agent",
+    "commit": "9e01b44dd23978f9ff40b7837467f3a9f1582130",
+    "license": "MIT",
+    "files": [
+      {
+        "path": "tools/vision_tools.py",
+        "sha256": "df3072ca25fbe9bc5d58acfb22cd2ce71af64f72b00477f4f4f841d1a27c2084"
+      },
+      {
+        "path": "tools/vision_tools_image_prep.py",
+        "sha256": "94ef5f78b3e746395036a2e24e5ce452735e5636dc8762f3507b2cfbaae38d4f"
+      }
+    ]
+  },
+  "adaptation": "Source-informed adaptation of image validation/normalization before base64 and explicit auxiliary vision model call. Hermes global config, URL/path resolver and provider router are replaced by scoped registered MaterialStore reads and existing AsyncModel interface; no separate host, tool permissions or model fallback are created.",
+  "target_hashes": {
+    "src/shittim_core/tools/vision.py": "d6bee7cd70866a1856e3387abc4179dcd0314d678830714b20f506d7254a78e5",
+    "tests/integration/test_vision_tools.py": "4365ebd88fc2e16f0ed0fd111eb1e642b273a1d86b20a28975d04137f68df8e5"
+  },
+  "dependencies": {
+    "Pillow": "13.0.0"
+  },
+  "dependency_evidence": "https://pypi.org/project/pillow/13.0.0/",
+  "interface": "register_vision_tool(tools, store, material_root, model=None, *, config=None); VisionConfig(state,model_label,max_bytes,max_pixels,timeout_seconds,max_output_chars)",
+  "readiness": "unconfigured by default; ready requires explicit label and model; unsupported is explicitly configured, not inferred from generic HTTP400.",
+  "validation": {
+    "integration_tests": "20 passed",
+    "ruff": "passed",
+    "pyright": "fusion cwd project strict check: 0 errors, 0 warnings",
+    "model_transport": "real AsyncOpenAI + mock HTTP SSE; not a live visual model claim"
+  },
+  "limits": [
+    "Live provider visual understanding must be separately verified before readiness=ready.",
+    "Only PNG/JPEG/GIF/WebP registered artifacts accepted.",
+    "Animated images send first frame explicitly labelled, preserve original SHA256 and transmitted SHA256.",
+    "Image text and model analysis are untrusted source material; this model call gets no tools."
+  ],
+  "hash_audit": {
+    "checked_at": "2026-10-19T05:32:14.660332+00:00",
+    "target_updates": [
+      {
+        "target": "src/shittim_core/tools/vision.py",
+        "previous_sha256": "8201277f6b0214fa59cc4b6d57e0320b358f316fa74010c1a57a04548af069f8",
+        "current_sha256": "d6bee7cd70866a1856e3387abc4179dcd0314d678830714b20f506d7254a78e5",
+        "checked_at": "2026-10-19T05:32:14.660332+00:00"
+      },
+      {
+        "target": "tests/integration/test_vision_tools.py",
+        "previous_sha256": "4632790091e30f2387292c4c437a5f3c64587a6d679fa1c1c4fbcd9deea9b61f",
+        "current_sha256": "4365ebd88fc2e16f0ed0fd111eb1e642b273a1d86b20a28975d04137f68df8e5",
+        "checked_at": "2026-10-19T05:32:14.660332+00:00"
+      }
+    ],
+    "note": "Final frozen src/tests/tools byte inventory. Shared-file hashes cover application-owned integration changes too; source attribution applies only to the specifically described algorithms/behaviors, not every line of a shared target. Original validation observations are retained."
+  },
+  "latest_application_adaptation": "Pre-dispatch RunHalted/StaleView becomes not_executed; in-flight uncertain browser outcomes retain unknown. Application control/effect adaptation, not new upstream source copying."
+}

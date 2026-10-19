@@ -1,0 +1,186 @@
+{
+  "upstream": {
+    "repository": "https://github.com/NousResearch/hermes-agent",
+    "commit": "9e01b44dd23978f9ff40b7837467f3a9f1582130",
+    "license": "MIT",
+    "license_source": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/LICENSE",
+    "license_text": "MIT License\r\n\r\nCopyright (c) 2025 Nous Research\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n"
+  },
+  "hash_basis": "SHA-256 of bytes in the pinned local checkout; target formatting and typed adaptations differ intentionally.",
+  "ports": [
+    {
+      "target": "src/shittim_core/domain/model.py",
+      "mode": "adapted_copy",
+      "changes": "Preserve normalized ToolCall/Usage/Response; finish_reason allows None so dropped streams cannot silently become stop.",
+      "sources": [
+        {
+          "path": "agent/transports/types.py",
+          "sha256": "208098a093cf7243e2168681ad3d0ce8eafecdee65e0a6e19839fcdfbf4e3fa4",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/transports/types.py"
+        }
+      ]
+    },
+    {
+      "target": "src/shittim_core/agent/budget.py",
+      "mode": "adapted_copy",
+      "changes": "Original lock-based counter; add explicit typing and local formatting; no upstream configuration or default runtime budget.",
+      "sources": [
+        {
+          "path": "agent/iteration_budget.py",
+          "sha256": "c6ac199bf3d53ae6eb840fa1e72fa191e8c00af535f0621896a98196fe880f72",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/iteration_budget.py"
+        }
+      ]
+    },
+    {
+      "target": "src/shittim_core/agent/repetition.py",
+      "mode": "adapted_copy",
+      "changes": "Original repetition algorithms and stream watch; wider input annotation matches defensive type guard.",
+      "sources": [
+        {
+          "path": "agent/repetition_guard.py",
+          "sha256": "b24651bbfe8a56f083e75064846a42e75dd799269de4aa32895da0226ed8f98b",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/repetition_guard.py"
+        }
+      ]
+    },
+    {
+      "target": "src/shittim_core/agent/content.py",
+      "mode": "adapted_copy",
+      "changes": "Original text projection helpers; explicit casts for strict checking, no upstream imports.",
+      "sources": [
+        {
+          "path": "agent/message_content.py",
+          "sha256": "65d45e23dba4d05eab9a7c61de3037f26e4effebf39121e85fd6e084b785123b",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/message_content.py"
+        }
+      ]
+    },
+    {
+      "target": "src/shittim_core/agent/tool_call_stream.py",
+      "mode": "adapted_copy",
+      "changes": "Keep slot reassignment and fragment aggregation; public local class name, typed containers, both eager and lazy upstream imports removed.",
+      "sources": [
+        {
+          "path": "agent/chat_completion_helpers_tool_calls.py",
+          "sha256": "8298969bd2fba28edc17c8a0ae6ad1105f45b7ce91c5a6656b3c36a36ee0bac2",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/chat_completion_helpers_tool_calls.py"
+        }
+      ]
+    },
+    {
+      "target": "src/shittim_core/agent/sdk_fields.py",
+      "mode": "extracted_functions",
+      "changes": "Port field:23-30 and model-dump helpers:1544-1554; only local SDK value inspection.",
+      "sources": [
+        {
+          "path": "agent/reasoning_carriers.py",
+          "sha256": "c21e95fccadfeddc433be1a4837824b4a0e94715e0bf31ba07172d896e772480",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/reasoning_carriers.py"
+        },
+        {
+          "path": "agent/chat_completion_helpers.py",
+          "sha256": "8e4348884b780999fd33ddaecca688f1afcfe4f66940b5bac62c222383c41869",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/chat_completion_helpers.py"
+        }
+      ]
+    },
+    {
+      "target": "src/shittim_core/agent/model.py",
+      "mode": "adapted_algorithms",
+      "changes": "Port normalization:689-779, stream completeness:3256-3346 and reasoning replay behavior; AsyncOpenAI injected, SDK retries disabled; incomplete tool JSON is rejected rather than repaired. Uses the project-owned strict JSON-object parser: rejects duplicate decoded keys and non-finite numeric values before dispatch.",
+      "sources": [
+        {
+          "path": "agent/transports/chat_completions.py",
+          "sha256": "6109040e7b8e6ccdaaaa823104581e1ee753db6032374baf72847c05e8e90d38",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/transports/chat_completions.py"
+        },
+        {
+          "path": "agent/chat_completion_helpers.py",
+          "sha256": "8e4348884b780999fd33ddaecca688f1afcfe4f66940b5bac62c222383c41869",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/chat_completion_helpers.py"
+        },
+        {
+          "path": "agent/message_sanitization.py",
+          "sha256": "4dd904f9a69376fc8801f47b49f829869d5ef49d6bccd0a73d82af84e8f580c5",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/message_sanitization.py"
+        }
+      ],
+      "target_sha256": "de9856329a253dea0896175db43788023fc62fecd6b3ed2e74d03618d96eae43"
+    },
+    {
+      "target": "src/shittim_core/agent/loop.py",
+      "mode": "rewritten_orchestration_with_ported_ordering",
+      "changes": "Preserve iteration/request/response/tool/final order:1656-1709 and persist-before-dispatch:76-177. Replace giant AIAgent, phase reflection, leases, plugins, CLI hooks with RunPorts. Stop/stale closes unexecuted calls; inflight work is retained and late actual result recorded. Stable call-id fallback/uniqueness follows upstream algorithm with local names. Uses the project-owned strict JSON-object parser: rejects duplicate decoded keys and non-finite numeric values before dispatch.",
+      "sources": [
+        {
+          "path": "agent/conversation_loop.py",
+          "sha256": "5a2b1973189300f0f07a990e39c6f5ddf200288aaec1032205685bef3437e4bf",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/conversation_loop.py"
+        },
+        {
+          "path": "agent/turn_tool_round.py",
+          "sha256": "1ccd3574528597f5c3a5589729849f8a10e422f0d970af3bb03b1fbd277f1f29",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/turn_tool_round.py"
+        },
+        {
+          "path": "agent/turn_iteration_prep.py",
+          "sha256": "73ceb91f917a682665845360557a8a45c0623e257ff9fee4995ae786ce2a441a",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/turn_iteration_prep.py"
+        },
+        {
+          "path": "agent/message_sanitization.py",
+          "sha256": "4dd904f9a69376fc8801f47b49f829869d5ef49d6bccd0a73d82af84e8f580c5",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/message_sanitization.py"
+        }
+      ],
+      "target_sha256": "de3b87e004b3af9df9287a7019c0d3c8cb5539429e0b361178d84d9161191d62"
+    },
+    {
+      "target": "tests/agent/test_model.py",
+      "mode": "adapted_behavior_tests",
+      "changes": "Port changing-ID fragment and same-name split behaviors; add SDK MockTransport/protocol/extra-content/disabled-retry tests.",
+      "sources": [
+        {
+          "path": "tests/agent/test_chat_completion_helpers_tool_calls.py",
+          "sha256": "2ad0ef28a90013b85ca028dc4a789293f483f01eb34935db87ac7a909bebe526",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tests/agent/test_chat_completion_helpers_tool_calls.py"
+        }
+      ]
+    },
+    {
+      "target": "tests/agent/test_hermes_primitives.py",
+      "mode": "adapted_behavior_tests",
+      "changes": "Keep budget concurrency/exhaustion assertion and repetition behavior; no upstream test harness import.",
+      "sources": [
+        {
+          "path": "tests/agent/test_iteration_budget_race.py",
+          "sha256": "0f193f2f45e6a6c3655f1ad3e8f7c7084f4f4f762fc94afad03ea2d4e1985cb2",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/tests/agent/test_iteration_budget_race.py"
+        },
+        {
+          "path": "agent/repetition_guard.py",
+          "sha256": "b24651bbfe8a56f083e75064846a42e75dd799269de4aa32895da0226ed8f98b",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/9e01b44dd23978f9ff40b7837467f3a9f1582130/agent/repetition_guard.py"
+        }
+      ]
+    }
+  ],
+  "project_owned": [
+    "src/shittim_core/agent/ports.py",
+    "tests/agent/test_loop.py",
+    "src/shittim_core/domain/json_args.py"
+  ],
+  "runtime_boundary": {
+    "model_sdk": "openai==2.24.0",
+    "transport": "httpx==0.28.1",
+    "runtime": "Python 3.12",
+    "upstream_app_loaded": false,
+    "model_calls_real": false,
+    "notes": [
+      "Only the required OpenAI Chat Completions wire path is implemented. Other upstream provider-specific signatures/transports are not claimed supported.",
+      "SDK mock probe validates actual installed SDK and HTTP/SSE codec with synthetic data, not a real model service.",
+      "Tool schema/authorization/effect deduplication and durable unknown blockers belong to application RunPorts/ToolExecutor, not SDK normalization."
+    ]
+  }
+}

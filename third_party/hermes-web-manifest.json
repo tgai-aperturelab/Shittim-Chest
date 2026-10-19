@@ -1,0 +1,130 @@
+{
+  "upstream": {
+    "repository": "https://github.com/NousResearch/hermes-agent",
+    "commit": "9e01b44dd23978f9ff40b7837467f3a9f1582130",
+    "license": "MIT",
+    "files": [
+      {
+        "path": "plugins/web/ddgs/provider.py",
+        "sha256": "16905bb4acb5931bd14028897ae0fadbfcd6c4df13abbd96c87583dc081cc73b"
+      },
+      {
+        "path": "plugins/web/ddgs/_search_worker.py",
+        "sha256": "f0b13cf012e9c07db413ac7e71e0f9d6256cae895921b8032963f6367404513c"
+      },
+      {
+        "path": "tools/web_tools.py",
+        "sha256": "f9e9dae28a84b00f5b03bdd49398376950231001eece775db2f9d7235a40a1a6"
+      },
+      {
+        "path": "tools/web_tools_extract.py",
+        "sha256": "54f4eeb509200098aa2ed437c7a528d7d40a0d4708571e4b03a1c5ab1db0683b"
+      }
+    ]
+  },
+  "ported_files": [
+    "src/shittim_core/engine/hermes/web_search_worker.py",
+    "src/shittim_core/tools/web.py"
+  ],
+  "adaptation": "Preserve Hermes DDGS disposable-worker/hard-deadline lifecycle and normalized source results. Replace Hermes host config, plugin registries and global interrupt with explicit WebConfig/async lifecycle. Extraction uses official trafilatura parser, httpx transport and per-hop DNS-pinned address checks; no whole Hermes host is launched. Current adapter also owns scoped evidence/material integration and explicit query/extraction validation. A target hash refresh is not a claim that prior live observations were repeated.",
+  "dependencies": {
+    "ddgs": "9.16.0",
+    "trafilatura": "2.3.1",
+    "httpx": "0.28.1"
+  },
+  "dependency_evidence": [
+    "https://pypi.org/project/ddgs/9.16.0/",
+    "https://pypi.org/project/trafilatura/2.3.1/",
+    "Hermes pyproject.toml ddgs optional dependency"
+  ],
+  "checks": {
+    "integration_tests": "13 passed",
+    "ruff": "passed",
+    "pyright": "Project strict check from fusion cwd: zero web diagnostics; 13 unrelated mcp_client diagnostics remained at this check. Earlier file-only basic check is not strict-project evidence."
+  },
+  "live_observations": [
+    {
+      "operation": "extract",
+      "url": "https://docs.python.org/3/library/asyncio.html",
+      "configuration": "default",
+      "outcome": "blocked_nonpublic_dns",
+      "resolved_ip": "198.18.0.156"
+    },
+    {
+      "operation": "search",
+      "query": "Python asyncio official documentation",
+      "backend": "auto",
+      "outcome": "30-second hard timeout; worker reaped"
+    },
+    {
+      "operation": "search",
+      "query": "Python asyncio official documentation",
+      "backend": "bing",
+      "outcome": "20-second hard timeout; worker reaped"
+    },
+    {
+      "operation": "search",
+      "query": "Python asyncio official documentation",
+      "backend": "duckduckgo",
+      "outcome": "DDGSException; worker reaped"
+    },
+    {
+      "operation": "extract",
+      "url": "https://docs.python.org/3/library/asyncio.html",
+      "configuration": {
+        "allowed_private_networks": [
+          "198.18.0.0/15"
+        ]
+      },
+      "outcome": "succeeded",
+      "title": "asyncio — Asynchronous I/O",
+      "downloaded_bytes": 25411,
+      "truncated": false,
+      "note": "Network exception is explicit in isolated probe only. First console serialization failed with GBK UnicodeEncodeError; repeated probe using ASCII JSON output succeeded. Product defaults unchanged."
+    }
+  ],
+  "limits": [
+    "Live search success not demonstrated on this host; no fake results substituted.",
+    "Unexpected compressed transfers are explicitly rejected when server ignores Accept-Encoding: identity.",
+    "Browser-rendered and binary documents require their respective browser/material tools.",
+    "Injected HTTP clients are trusted application configuration and must preserve the destination boundary."
+  ],
+  "target_hashes": {
+    "src/shittim_core/engine/hermes/web_search_worker.py": "0fd220f54c98c04ad1856dc3adf3532e601202036873084ac3f7f148aaf72927",
+    "src/shittim_core/tools/web.py": "da80f9206bfbeb7a2f63d4f3c8366e02f726ef36c5c9bd8f48cd1e41f7beef6f"
+  },
+  "hash_audit": {
+    "checked_at": "2026-10-19T05:32:14.660332+00:00",
+    "target_updates": [
+      {
+        "target": "src/shittim_core/tools/web.py",
+        "previous_sha256": "77d0d171676084b9fee1f5c9c2d3a184f1b45f71f68572893f0b6ca4ebfd55ff",
+        "current_sha256": "dbf37a6b40980b5f2e182b6e6047fe611dd99c3b7ad288accb092ebbb75b2549"
+      },
+      {
+        "target": "src/shittim_core/tools/web.py",
+        "previous_sha256": "dbf37a6b40980b5f2e182b6e6047fe611dd99c3b7ad288accb092ebbb75b2549",
+        "current_sha256": "da80f9206bfbeb7a2f63d4f3c8366e02f726ef36c5c9bd8f48cd1e41f7beef6f",
+        "checked_at": "2026-10-19T05:28:15.444696+00:00",
+        "reason": "Explicit application-owned bing_rss backend and refusal of disabled/unavailable DDGS engine selection rather than silent auto fallback."
+      },
+      {
+        "target": "src/shittim_core/engine/hermes/web_search_worker.py",
+        "previous_sha256": "0c595ef82ebeb50ee3e6fe94518e801d94149d2c0891a7440c25e1b4061f4160",
+        "current_sha256": "0fd220f54c98c04ad1856dc3adf3532e601202036873084ac3f7f148aaf72927",
+        "checked_at": "2026-10-19T05:28:15.444696+00:00",
+        "reason": "Explicit application-owned bing_rss backend and refusal of disabled/unavailable DDGS engine selection rather than silent auto fallback."
+      }
+    ],
+    "note": "Final frozen src/tests/tools byte inventory. Shared-file hashes cover application-owned integration changes too; source attribution applies only to the specifically described algorithms/behaviors, not every line of a shared target. Original validation observations are retained."
+  },
+  "port_kinds": {
+    "src/shittim_core/engine/hermes/web_search_worker.py": "adapted_worker_algorithm",
+    "src/shittim_core/tools/web.py": "application_owned_source_informed_adapter"
+  },
+  "application_extensions": {
+    "bing_rss": "Explicit application-owned HTTP/RSS backend using the existing checked downloader and stdlib XML parser; UTF-8 only, DTD/entity declarations rejected. No Hermes RSS implementation is claimed copied and no new dependency is introduced.",
+    "ddgs_selection": "Pinned DDGS engine catalog checked before invocation; explicit disabled/unavailable engine selection fails rather than silently selecting auto.",
+    "validation_boundary": "Historical live observations above are preserved; source refresh does not assert that a newer search route was live-verified."
+  }
+}
