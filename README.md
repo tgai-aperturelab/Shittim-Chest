@@ -24,7 +24,7 @@ Windows PowerShell：
 
 ```powershell
 py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install --only-binary=:all: -r requirements-dev.lock setuptools==84.0.0
+.\.venv\Scripts\python.exe -m pip install --only-binary=:all: -r requirements-dev.lock
 .\.venv\Scripts\python.exe -m pip install --no-build-isolation --no-deps -e .
 .\.venv\Scripts\python.exe -m shittim_core --help
 ```
@@ -33,12 +33,12 @@ Linux：
 
 ```sh
 python3.12 -m venv .venv
-.venv/bin/python -m pip install --only-binary=:all: -r requirements-dev.lock setuptools==84.0.0
+.venv/bin/python -m pip install --only-binary=:all: -r requirements-dev.lock
 .venv/bin/python -m pip install --no-build-isolation --no-deps -e .
 .venv/bin/python -m shittim_core --help
 ```
 
-需要的系统依赖包括执行 shell、`rg`，Linux 沙箱还需可运行的 `bwrap`。Browser use 已按用户要求移除；网页搜索与HTTP正文提取保留。
+需要的系统依赖包括执行 shell、`rg`，Linux 沙箱还需可运行的 `bwrap`。Browser use 已按用户要求移除；网页搜索与 HTTP 正文提取保留。
 
 ## 选择配置并检查
 
@@ -54,7 +54,7 @@ python3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m shittim_core --check --config var/config.local.json
 ```
 
-Linux 改用 `.venv/bin/python`。`--check` 不创建应用数据库、不启动监听器或模型客户端，也不发起 MCP discovery；报告分别列出 implemented、registered、configured_grant、静态 ready 和 `live_readiness=not_checked`。配置检查不能证明 模型能调用、MCP 能连接或 QQ 已收发。
+Linux 改用 `.venv/bin/python`。`--check` 不创建应用数据库、不启动监听器或模型客户端，也不发起 MCP discovery；报告分别列出 implemented、registered、configured_grant、静态 ready 和 `live_readiness=not_checked`。配置检查不能证明模型能调用、MCP 能连接或 QQ 已收发。
 
 配置只填写 `token_env`、`api_key_env` 等环境变量**名称**，不保存密钥值。应用不自动加载 `.env`；由本次进程的秘密配置方式注入变量，不复用根目录 Pi 的配置。只有准备好隔离账号、端口及授权范围之后才启动：
 

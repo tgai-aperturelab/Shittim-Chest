@@ -23,7 +23,7 @@ The configured candidate `data_dir` is never opened or modified: the test applic
 
 ## Invocation
 
-From `fusion/`, without live opt-in (no connection or listener):
+From the repository root, without live opt-in (no connection or listener):
 
 ```text
 .venv/Scripts/python.exe -m tools.qq_candidate_probe
